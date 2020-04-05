@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CSV
 {
-    public static void write(string fileName, POD pod)
+    public static void WriteSequential(string fileName, POD pod)
     {
         StreamWriter sw = new StreamWriter(fileName);
         for (int i = 0; i < pod.getObjectCount(); i++)
@@ -19,7 +19,7 @@ public class CSV
         sw.Close();
     }
 
-    public static void read(string fileName, POD pod)
+    public static void ReadSequential(string fileName, POD pod)
     {
         StreamReader sr = new StreamReader(fileName);
         string readStr = sr.ReadLine();
@@ -33,17 +33,30 @@ public class CSV
         }
         sr.Close();
     }
-    /*
-    // Start is called before the first frame update
-    void Start()
+
+    public static void ReadSummary(string fileName, POD pod)
     {
-        
+        StreamReader sr = new StreamReader(fileName);
+        string readStr = sr.ReadLine();
+        string[] tempStr;
+        while(readStr != null)
+        {
+            tempStr = readStr.Split(',');
+            pod.addSummaryObject(tempStr[0]);
+            pod.addTimeSpan(Convert.ToInt64(tempStr[1]));
+            readStr = sr.ReadLine();
+        }
+        sr.Close();
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void WriteSummary(string fileName, POD pod)
     {
-        
+        StreamWriter sw = new StreamWriter(fileName);
+        for(int i = 0; i < pod.getSummaryCount(); i++)
+        {
+            string str = String.Format("{0},{1}", pod.getSummaryObject(i), pod.getSummaryTimeSpan(i));
+            sw.WriteLine(str);
+        }
+        sw.Close();
     }
-    */
 }

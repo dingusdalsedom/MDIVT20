@@ -11,7 +11,9 @@ public class POD
     public POD()
     {
         objects = new List<string>();
+        objectsSummary = new List<string>();
         timeSpans = new List<long>();
+        timeSpansSummary = new List<long>();
         stopWatch = new System.Diagnostics.Stopwatch();
     }
 
@@ -25,11 +27,23 @@ public class POD
     }
 
     /*
+     * Helper function to attempt to add object to summary list
+     */
+    public void addSummary(string obj, long timeElapsed, bool condition)
+    {
+        if (objectsSummary.Contains(obj))
+        {
+
+        }
+    }
+    /*
     * Funcion for adding objects using a stopwatch to time for how long user
     * watched given object. Used together with Raycasting functionality
     */
     public void addTimedObject(string obj)
     {
+        long timeElapsed = 0;
+        bool condition = false;
         if (this.objects.Count == 0) // First item exception
         {
             stopWatch.Start();
@@ -38,11 +52,15 @@ public class POD
         {
             // Else stop stopwatch, add time taken and restart
             stopWatch.Stop();
-            this.timeSpans.Add(stopWatch.ElapsedMilliseconds);
+            timeElapsed = stopWatch.ElapsedMilliseconds;
+            condition = true;
+            this.timeSpans.Add(timeElapsed);
             stopWatch.Restart();
         }
         // For debugging purposes
         Thread.Sleep(1);
+        // Add object to summary
+        addSummary(obj, timeElapsed);
         // Always add object
         this.objects.Add(obj);
     }
@@ -55,6 +73,17 @@ public class POD
     {
         this.stopWatch.Stop();
         this.timeSpans.Add(stopWatch.ElapsedMilliseconds);
+        string obj = objects[objects.Count - 1];
+        if (objectsSummary.Contains(obj))
+        {
+            int index = objectsSummary.IndexOf(obj);
+            timeSpansSummary[index] = timeSpansSummary[index] + stopWatch.ElapsedMilliseconds;
+        }
+        else
+        {
+            objectsSummary.Add(objects[objects.Count - 1]);
+            timeSpansSummary.Add(stopWatch.ElapsedMilliseconds);
+        }
     }
 
     /*
@@ -66,21 +95,46 @@ public class POD
     }
 
     /*
-        * Add timespan *from* CSV file
-        */
+    * Add timespan *from* CSV file
+    */
     public void addTimeSpan(long timeSpan)
     {
         this.timeSpans.Add(timeSpan);
     }
+    
+    /*
+     * Add summary timespan *from* CSV file
+     */
+    public void addSummaryTimeSpan(long timeSpan)
+    {
+        this.timeSpansSummary.Add(timeSpan);
+    }
 
     /*
-    * Getter for the amount of objects currently stored in POD.
-    * Should always be the same as timespans thus no need for getter for
-    * timespans.
-    */
+     * Add summary object *from* CSV file
+     */
+     public void addSummaryObject(string obj)
+    {
+        this.objectsSummary.Add(obj);
+    }
+
+    /*
+     * Getter for the amount of objects currently stored in POD.
+     * Should always be the same as timespans thus no need for getter for
+     * timespans.
+     */
     public int getObjectCount()
     {
-        return objects.Count;
+        return this.objects.Count;
+    }
+
+    /*
+     * Getter for the amount of objects currently stored in summary List,
+     * this should match the amount of items in timeSpansSummary.
+     */
+    public int getSummaryCount()
+    {
+        return this.objectsSummary.Count;
     }
 
     /*
@@ -92,34 +146,36 @@ public class POD
     }
 
     /*
-        * Function for retrieving an object from the list, used in CSV Write
-        */
+    * Function for retrieving an object from the list, used in CSV Write
+    */
     public long getTimeSpan(int i)
     {
         return this.timeSpans[i];
     }
 
     /*
-        * Private functions used in POD
-        */
-    private System.Diagnostics.Stopwatch stopWatch;
-    //private TimeSpan timeSpan;
-    private List<string> objects;
-    private List<long> timeSpans;
-
-    void Start()
+     * Function for retrieving an object from the list, used in CSV summary write
+     */
+    public string getSummaryObject(int i)
     {
-        var pod = new POD();
-        var pod2 = new POD();
-        pod.addTimedObject("test1");
-        pod.addTimedObject("test2");
-        pod.addTimedObject("test3");
-        pod.addTimedObject("test4");
-        pod.addTimedObject("test5");
-        pod.stopTimer();
-        CSV.write("Assets/Scenes/TestScene/Resources/CSV.txt", pod);
-        CSV.read("Assets/Scenes/TestScene/Resources/CSV.txt", pod2);
-        Debug.Log("wtf");
+        return this.objectsSummary[i];
     }
+
+    /*
+     * Function for retrieving an object from the list, used in CSV summary write
+     */
+    public long getSummaryTimeSpan(int i)
+    {
+        return this.timeSpansSummary[i];
+    }
+
+    /*
+    * Private functions used in POD
+    */
+    private System.Diagnostics.Stopwatch stopWatch;
+    private List<string> objects;
+    private List<string> objectsSummary;
+    private List<long> timeSpans;
+    private List<long> timeSpansSummary;
 }
 
