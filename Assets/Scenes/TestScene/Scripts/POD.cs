@@ -29,11 +29,17 @@ public class POD
     /*
      * Helper function to attempt to add object to summary list
      */
-    public void addSummary(string obj, long timeElapsed, bool condition)
+    public void addSummary(string obj, long timeElapsed)
     {
         if (objectsSummary.Contains(obj))
         {
-
+            int index = objectsSummary.IndexOf(obj);
+            timeSpansSummary[index] = timeSpansSummary[index] + timeElapsed;
+        }
+        else
+        {
+            objectsSummary.Add(obj);
+            timeSpansSummary.Add(timeElapsed);
         }
     }
     /*
@@ -43,7 +49,6 @@ public class POD
     public void addTimedObject(string obj)
     {
         long timeElapsed = 0;
-        bool condition = false;
         if (this.objects.Count == 0) // First item exception
         {
             stopWatch.Start();
@@ -53,14 +58,15 @@ public class POD
             // Else stop stopwatch, add time taken and restart
             stopWatch.Stop();
             timeElapsed = stopWatch.ElapsedMilliseconds;
-            condition = true;
             this.timeSpans.Add(timeElapsed);
             stopWatch.Restart();
         }
         // For debugging purposes
         Thread.Sleep(1);
+
         // Add object to summary
-        addSummary(obj, timeElapsed);
+        if(objects.Count > 0)
+            addSummary(objects[objects.Count - 1], timeElapsed);
         // Always add object
         this.objects.Add(obj);
     }
@@ -173,6 +179,7 @@ public class POD
     * Private functions used in POD
     */
     private System.Diagnostics.Stopwatch stopWatch;
+    private string lastObject;
     private List<string> objects;
     private List<string> objectsSummary;
     private List<long> timeSpans;

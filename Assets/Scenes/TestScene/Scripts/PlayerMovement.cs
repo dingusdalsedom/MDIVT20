@@ -30,7 +30,17 @@ public class PlayerMovement : MonoBehaviour
         pod.addTimedObject("test3");
         pod.addTimedObject("test4");
         pod.addTimedObject("test5");
-        //pod.stopTimer();
+        pod.addTimedObject("test1");
+        pod.addTimedObject("test2");
+        pod.addTimedObject("test3");
+        pod.addTimedObject("test4");
+        pod.addTimedObject("test5");
+        pod.addTimedObject("test1");
+        pod.addTimedObject("test2");
+        pod.addTimedObject("test3");
+        pod.addTimedObject("test4");
+        pod.addTimedObject("test5");
+        pod.stopTimer();
         CSV.WriteSequential("Assets/Scenes/TestScene/Resources/CSVSeq.txt", pod);
         CSV.ReadSequential("Assets/Scenes/TestScene/Resources/CSVSeq.txt", pod2);
         CSV.WriteSummary("Assets/Scenes/TestScene/Resources/CSVSum.txt", pod);
