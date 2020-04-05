@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using UnityEngine;
 
-public class POD : MonoBehaviour
+public class POD
 {
     // Constructor
     public POD()
     {
         objects = new List<string>();
         timeSpans = new List<long>();
-        stopWatch = new Stopwatch();
-        timeSpan = new TimeSpan();
+        stopWatch = new System.Diagnostics.Stopwatch();
     }
 
     // Used to verify that the code works
@@ -104,36 +102,24 @@ public class POD : MonoBehaviour
     /*
         * Private functions used in POD
         */
-    private Stopwatch stopWatch;
-    private TimeSpan timeSpan;
+    private System.Diagnostics.Stopwatch stopWatch;
+    //private TimeSpan timeSpan;
     private List<string> objects;
     private List<long> timeSpans;
 
-    // File utility stuff
-    static void CSVWrite(string fileName, POD pod)
+    void Start()
     {
-        StreamWriter sw = new StreamWriter(fileName);
-        for (int i = 0; i < pod.getObjectCount(); i++)
-        {
-            string str = String.Format("{0},{1}", pod.getObject(i), pod.getTimeSpan(i));
-            sw.WriteLine(str);
-        }
-        sw.Close();
-    }
-
-    static void CSVRead(string fileName, POD pod)
-    {
-        StreamReader sr = new StreamReader(fileName);
-        string readStr = sr.ReadLine();
-        string[] tempStr;
-        while (readStr != null)
-        {
-            tempStr = readStr.Split(',');
-            pod.addUntimedObject(tempStr[0]);
-            pod.addTimeSpan(Convert.ToInt64(tempStr[1]));
-            readStr = sr.ReadLine();
-        }
-        sr.Close();
+        var pod = new POD();
+        var pod2 = new POD();
+        pod.addTimedObject("test1");
+        pod.addTimedObject("test2");
+        pod.addTimedObject("test3");
+        pod.addTimedObject("test4");
+        pod.addTimedObject("test5");
+        pod.stopTimer();
+        CSV.write("Assets/Scenes/TestScene/Resources/CSV.txt", pod);
+        CSV.read("Assets/Scenes/TestScene/Resources/CSV.txt", pod2);
+        Debug.Log("wtf");
     }
 }
 
