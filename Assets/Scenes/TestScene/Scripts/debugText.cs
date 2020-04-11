@@ -6,9 +6,11 @@ public class debugText : MonoBehaviour
 {
     private Canvas can;
     private Text debug_text;
-    public bool toggle_debug = true;
+    public bool toggle_debug = false;
     public string currently_looking_at;
     public string duration_looked_at;
+    public string previously_looked_at;
+    public int nr_objects_looked_at;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,8 @@ public class debugText : MonoBehaviour
         {
             debug_text.text = "Sight tracker debug information: \n" +
             "Currently looking at: " + currently_looking_at + "\n" +
-            "Duration looked at: " + duration_looked_at + "\n";
+            "Duration looked at: " + duration_looked_at + "\n" +
+            "Total number of objects looked at: " + nr_objects_looked_at;
         }
         else
         {

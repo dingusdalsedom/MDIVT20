@@ -62,7 +62,7 @@ public class POD
             stopWatch.Restart();
         }
         // For debugging purposes
-        Thread.Sleep(1);
+        //Thread.Sleep(1);
 
         // Add object to summary
         if(objects.Count > 0)
@@ -174,7 +174,24 @@ public class POD
     {
         return this.timeSpansSummary[i];
     }
+    public double getCurrentStopwatchTime()
+    {
+        return stopWatch.Elapsed.TotalSeconds;
+    }
 
+    public int nr_of_objects_looked_at()
+    {
+        List<string> found_singles = new List<string>();
+        foreach(string item in objects)
+        {
+            if(!found_singles.Contains(item))
+            {
+                found_singles.Add(item);
+            }
+        }
+
+        return found_singles.Count;
+    }
     /*
     * Private functions used in POD
     */

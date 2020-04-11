@@ -1,0 +1,4 @@
+Starting...,43
+red wall,2913
+green ball,1072
+red wall,1535
