@@ -4,16 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 public class debugText : MonoBehaviour
 {
+
     private Canvas can;
     private Text debug_text;
-    public bool toggle_debug = false;
-    public string currently_looking_at;
-    public string duration_looked_at;
-    public string previously_looked_at;
-    public int nr_objects_looked_at;
+    private bool toggle_debug = false;
+    private string currently_looking_at;
+    private string duration_looked_at;
+    private int nr_objects_looked_at;
+    public void set_debug_mode(bool debug)
+    {
+        toggle_debug = debug;
+    }
+    public void set_currently_looking_at(string name)
+    {
+        currently_looking_at = name;
+    }
+    public void set_duration_looked_at(string time)
+    {
+        duration_looked_at = time;
+    }
+    public void set_nr_objects_looked_at(int number)
+    {
+        nr_objects_looked_at = number;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         GameObject canvObj = new GameObject("Canvas");
         canvObj.transform.SetParent(this.transform);
         can = canvObj.AddComponent<Canvas>();

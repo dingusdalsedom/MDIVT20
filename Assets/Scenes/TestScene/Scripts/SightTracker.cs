@@ -11,14 +11,39 @@ public class SightTracker : MonoBehaviour
     private debugText debug_text_hud;
     private Raycast raycaster;
     private string previous_look_at = "";
+    public string DebugViewButton = "None";
+    KeyCode debugkey;
+    private KeyCode interpretDebugKey(string buttonName)
+    {
+        try
+        {
+            char[] tempCharArray = buttonName.ToCharArray();
+            tempCharArray[0] = char.ToUpper(tempCharArray[0]);
+            for (int i = 1; i < buttonName.Length; i++)
+            {
+                tempCharArray[i] = char.ToLower(tempCharArray[i]);
+            }
+            string finalButtonName = new string(tempCharArray);
+            DebugViewButton = finalButtonName;
+            KeyCode finalKeycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), finalButtonName);
+            return finalKeycode;
+        }
+        catch
+        {
+            Debug.LogError("Unable to define Debug View Button, Please use Unity KeyCodes for button specification.");
+            return KeyCode.None;
+        }
+        
+    }
     void Start()
     {
+
+
+        debugkey = interpretDebugKey(DebugViewButton);
         cam_gameobject = this.gameObject;
         debug_text_hud = cam_gameobject.AddComponent<debugText>();
         collectedData = new POD();
-
         raycaster = this.gameObject.AddComponent<Raycast>();
-        raycaster.fpsCam = cam_gameobject.GetComponent<Camera>();
 
 
     }
@@ -26,19 +51,24 @@ public class SightTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Set HUD if debug is turned on
-        if(debugView)
+        if (Input.GetKeyDown(debugkey))
         {
-            debug_text_hud.toggle_debug = true;
-            debug_text_hud.currently_looking_at = raycaster.currently_looking_at;
-            debug_text_hud.duration_looked_at = collectedData.getCurrentStopwatchTime().ToString();
-            debug_text_hud.nr_objects_looked_at = collectedData.nr_of_objects_looked_at();
+            debugView = !debugView;
         }
-        //Checks if new object was looked at
-        if((raycaster.currently_looking_at != previous_look_at))
+        //Set HUD if debug is turned on
+        debug_text_hud.set_debug_mode(debugView);
+        if (debugView)
         {
-            collectedData.addTimedObject(raycaster.currently_looking_at);
-            previous_look_at = raycaster.currently_looking_at;
+            debug_text_hud.set_currently_looking_at(raycaster.get_currently_looking_at());
+            debug_text_hud.set_duration_looked_at(collectedData.getCurrentStopwatchTime().ToString());
+            debug_text_hud.set_nr_objects_looked_at(collectedData.nr_of_objects_looked_at());
+        }
+
+        //Checks if new object was looked at
+        if((raycaster.get_currently_looking_at() != previous_look_at))
+        {
+            collectedData.addTimedObject(raycaster.get_currently_looking_at());
+            previous_look_at = raycaster.get_currently_looking_at();
         }
 
     }
