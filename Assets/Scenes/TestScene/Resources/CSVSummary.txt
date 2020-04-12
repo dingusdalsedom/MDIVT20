@@ -1,0 +1,2 @@
+green ball,4740
+red wall,2035

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Raycast : MonoBehaviour
 {
-    public Camera fpsCam;
-    public string prevName;     // name of previous looked at object
+    private Camera fpsCam;
+    private string currently_looking_at = "Starting...";
+    public string get_currently_looking_at()
+    {
+        return currently_looking_at;
+    }
 
     void Start()
     {
-        prevName = "";
+        fpsCam = this.gameObject.GetComponent<Camera>();
+        Update();
     }
     // Update is called once per frame
     void Update()
@@ -18,22 +23,11 @@ public class Raycast : MonoBehaviour
         // if player is looking at something (if the casted ray hit something)
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
         {
-            var selection = hit.transform;
-            var selectionInfo = selection.GetComponent<TimeInfoObject>();   // access the script component of object 
-
-            if (selectionInfo != null)
-            {
-                selectionInfo.timeLookedAt += Time.deltaTime;   // add the time 
-
-                // check if new object 
-                if (prevName != hit.transform.name)     
-                {
-                    selectionInfo.timeStamps.Add(timeToText(Time.time));
-                    selectionInfo.timeStamp = timeToText(Time.time);
-                }
-            }
-            prevName = hit.transform.name;
-            Debug.Log(hit.transform.name);     // print name of object in debug 
+            currently_looking_at = hit.collider.gameObject.name;
+        }
+        else
+        {
+            currently_looking_at = "no target";
         }
     }
 
