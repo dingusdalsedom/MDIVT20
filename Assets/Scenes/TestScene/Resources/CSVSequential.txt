@@ -1,6 +1,0 @@
-green ball,2684
-red wall,609
-green ball,312
-red wall,617
-green ball,1744
-red wall,809
