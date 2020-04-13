@@ -37,15 +37,11 @@ public class SightTracker : MonoBehaviour
     }
     void Start()
     {
-
-
         debugkey = interpretDebugKey(DebugViewButton);
         cam_gameobject = this.gameObject;
         debug_text_hud = cam_gameobject.AddComponent<debugText>();
         collectedData = new POD();
         raycaster = this.gameObject.AddComponent<Raycast>();
-
-
     }
 
     // Update is called once per frame
@@ -64,6 +60,10 @@ public class SightTracker : MonoBehaviour
             debug_text_hud.set_nr_objects_looked_at(collectedData.nr_of_objects_looked_at());
         }
 
+        // Store location and looking at vector every frame
+        collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
+        collectedData.addCurrentLocation(raycaster.getCurrentLocation());
+
         //Checks if new object was looked at
         if((raycaster.get_currently_looking_at() != previous_look_at))
         {
@@ -80,6 +80,7 @@ public class SightTracker : MonoBehaviour
             collectedData.stopTimer();
             CSV.WriteSequential("Assets/Scenes/TestScene/Resources/CSVSequential.txt", collectedData);
             CSV.WriteSummary("Assets/Scenes/TestScene/Resources/CSVSummary.txt", collectedData);
+            CSV.WriteTimeEventData("Assets/Scenes/TestScene/Resources/CSVTimeData.txt", collectedData);
         }
         
     }

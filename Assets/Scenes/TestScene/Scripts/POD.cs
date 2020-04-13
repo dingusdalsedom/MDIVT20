@@ -15,6 +15,47 @@ public class POD
         timeSpans = new List<long>();
         timeSpansSummary = new List<long>();
         stopWatch = new System.Diagnostics.Stopwatch();
+        lookingAt = new List<Vector3>();
+        currentLocation = new List<Vector3>();
+    }
+
+    /*
+     * Function for adding a vector to the looking at list
+     */
+    public void addLookingAtVector(Vector3 v)
+    {
+        lookingAt.Add(v);
+    }
+
+    /*
+     * Function for adding a vector to the current location list
+     */
+    public void addCurrentLocation(Vector3 v)
+    {
+        currentLocation.Add(v);
+    }
+
+    /*
+     * Function for getting the vector3 from list at index i
+     */
+    public Vector3 getLocationObject(int i)
+    {
+        return currentLocation[i];
+    }
+
+    /*
+     * Function for getting the vector3 from list at index i
+     */
+    public Vector3 getLookingAtObject(int i)
+    {
+        return lookingAt[i];
+    }
+
+    // Function for fetching the numbers of items in lookingAt list
+    // Should *always* be the same as lookingAt
+    public long getLocationCount()
+    {
+        return currentLocation.Count;
     }
 
     // Used to verify that the code works
@@ -201,5 +242,7 @@ public class POD
     private List<string> objectsSummary;
     private List<long> timeSpans;
     private List<long> timeSpansSummary;
+    private List<Vector3> lookingAt;
+    private List<Vector3> currentLocation;
 }
 
