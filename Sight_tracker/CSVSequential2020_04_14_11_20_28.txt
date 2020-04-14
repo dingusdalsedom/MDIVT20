@@ -1,0 +1,10 @@
+green ball,1001
+red wall,371
+Floor,179
+blue wall,264
+red wall,234
+no target,208
+red wall,201
+purple wall,367
+Floor,338
+red wall,1306

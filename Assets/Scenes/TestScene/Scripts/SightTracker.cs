@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class SightTracker : MonoBehaviour
 {
@@ -78,9 +79,10 @@ public class SightTracker : MonoBehaviour
         if(this.enabled)
         {
             collectedData.stopTimer();
-            CSV.WriteSequential("Assets/Scenes/TestScene/Resources/CSVSequential.txt", collectedData);
-            CSV.WriteSummary("Assets/Scenes/TestScene/Resources/CSVSummary.txt", collectedData);
-            CSV.WriteTimeEventData("Assets/Scenes/TestScene/Resources/CSVTimeData.txt", collectedData);
+            var folder = Directory.CreateDirectory("Sight_tracker");
+            CSV.WriteSequential("Sight_tracker/CSVSequential.txt", collectedData);
+            CSV.WriteSummary("Sight_tracker/CSVSummary.txt", collectedData);
+            CSV.WriteTimeEventData("Sight_tracker/CSVTimeData.txt", collectedData);
         }
         
     }

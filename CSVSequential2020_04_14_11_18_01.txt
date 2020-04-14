@@ -1,0 +1,12 @@
+green ball,446
+Floor,495
+green ball,381
+red wall,360
+green ball,207
+Floor,348
+red wall,169
+blue wall,320
+Floor,157
+blue wall,61
+red wall,189
+blue wall,521
