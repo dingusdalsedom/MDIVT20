@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 Assets/Scenes/TestScene/Resources/*.txt
 Assets/Scenes/TestScene/Resources/*.txt*
+*.txt
+*.txt*
+/Sight_tracker/*.txt
+/Sight_tracker/*.txt*
