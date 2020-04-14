@@ -1,5 +1,0 @@
-green ball,832
-red wall,247
-Floor,231
-blue wall,262
-red wall,1066
