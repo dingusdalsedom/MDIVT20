@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -10,14 +10,23 @@ using UnityEngine;
 public class CSV
 {
     /*
-     * Function for writing sequential data to file
+     * Function that inserts time & data for filename as
+     * well as generates a path for it
      */
-    public static void WriteSequential(string fileName, POD pod)
+    private static string CreatePath(string fileName)
     {
         string[] tempName = fileName.Split('.');
         string dateTime = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss");
         fileName = tempName[0] + dateTime + "." + tempName[1];
-        StreamWriter sw = new StreamWriter(fileName);
+        return fileName;
+    }
+
+    /*
+     * Function for writing sequential data to file
+     */
+    public static void WriteSequential(string fileName, POD pod)
+    {
+        StreamWriter sw = new StreamWriter(CreatePath(fileName));
         for (int i = 0; i < pod.getObjectCount(); i++)
         {
             string str = String.Format("{0},{1}", pod.getObject(i), pod.getTimeSpan(i));
@@ -33,10 +42,7 @@ public class CSV
      */
     public static void WriteTimeEventData(string fileName, POD pod)
     {
-        string[] tempName = fileName.Split('.');
-        string dateTime = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss");
-        fileName = tempName[0] + dateTime + "." + tempName[1];
-        StreamWriter sw = new StreamWriter(fileName);
+        StreamWriter sw = new StreamWriter(CreatePath(fileName));
         for(int i = 0; i < pod.getLocationCount() - 5; i++)
         {
             Vector3 look = pod.getLookingAtObject(i);
@@ -116,10 +122,7 @@ public class CSV
      */
     public static void WriteSummary(string fileName, POD pod)
     {
-        string[] tempName = fileName.Split('.');
-        string dateTime = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss");
-        fileName = tempName[0] + dateTime + "." + tempName[1];
-        StreamWriter sw = new StreamWriter(fileName);
+        StreamWriter sw = new StreamWriter(CreatePath(fileName));
         for (int i = 0; i < pod.getSummaryCount(); i++)
         {
             string str = String.Format("{0},{1}", pod.getSummaryObject(i), pod.getSummaryTimeSpan(i));

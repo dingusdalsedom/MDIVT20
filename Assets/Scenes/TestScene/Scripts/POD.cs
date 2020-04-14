@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -220,6 +220,9 @@ public class POD
         return stopWatch.Elapsed.TotalSeconds;
     }
 
+    /*
+     * Function to see how many items in the list that only appears once
+     */
     public int nr_of_objects_looked_at()
     {
         List<string> found_singles = new List<string>();
@@ -234,7 +237,7 @@ public class POD
         return found_singles.Count;
     }
     /*
-    * Private functions used in POD
+    * Private variables used in the POD class
     */
     private System.Diagnostics.Stopwatch stopWatch;
     private string lastObject;
