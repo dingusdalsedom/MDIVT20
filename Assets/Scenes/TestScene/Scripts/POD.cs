@@ -53,7 +53,7 @@ public class POD
 
     // Function for fetching the numbers of items in lookingAt list
     // Should *always* be the same as lookingAt
-    public long getLocationCount()
+    public int getLocationCount()
     {
         return currentLocation.Count;
     }
