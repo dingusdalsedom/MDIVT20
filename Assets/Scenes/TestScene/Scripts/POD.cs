@@ -17,6 +17,8 @@ public class POD
         stopWatch = new System.Diagnostics.Stopwatch();
         lookingAt = new List<Vector3>();
         currentLocation = new List<Vector3>();
+        FrameTime = new List<Double>();
+
     }
 
     /*
@@ -26,7 +28,10 @@ public class POD
     {
         lookingAt.Add(v);
     }
-
+    public void addFrameTime(Double time)
+    {
+        FrameTime.Add(time);
+    }
     /*
      * Function for adding a vector to the current location list
      */
@@ -41,6 +46,10 @@ public class POD
     public Vector3 getLocationObject(int i)
     {
         return currentLocation[i];
+    }
+    public Double getFrameTime(int i)
+    {
+        return FrameTime[i];
     }
 
     /*
@@ -247,5 +256,6 @@ public class POD
     private List<long> timeSpansSummary;
     private List<Vector3> lookingAt;
     private List<Vector3> currentLocation;
+    private List<Double> FrameTime;
 }
 

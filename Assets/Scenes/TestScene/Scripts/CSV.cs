@@ -47,7 +47,9 @@ public class CSV
         {
             Vector3 look = pod.getLookingAtObject(i);
             Vector3 loc = pod.getLocationObject(i);
-            string str = String.Format("{0},{1},{2},{3},{4},{5}", look.x, look.y, look.z, loc.x, loc.y, loc.z);
+            Double time = pod.getFrameTime(i);
+
+            string str = String.Format("{0},{1},{2},{3},{4},{5},{6}", look.x, look.y, look.z, loc.x, loc.y, loc.z, time);
             sw.WriteLine(str);
         }
         sw.Close();

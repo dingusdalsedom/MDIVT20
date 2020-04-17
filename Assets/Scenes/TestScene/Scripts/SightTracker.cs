@@ -14,12 +14,16 @@ public class SightTracker : MonoBehaviour
     private Raycast raycaster;
     private string previous_look_at = "";
     public string DebugViewButton = "None";
+    private double currentSampleTime = 0;
     KeyCode debugkey;
+    public enum Speeds
+    { Full = 1, Half = 2, Quarter = 4 };
+    public Speeds RecordRate;
     // Object polling things
-    public float IntervalInMS;
-    bool doOnce = false;
-    float upperBound = 0.0f;
-    float lowerBound = 0.0f;
+    private uint counter = 0;
+    private int rate = 1;
+    //public bool check = (RecordRate == Speeds.Full);
+    
     private KeyCode interpretDebugKey(string buttonName)
     {
         try
@@ -44,6 +48,8 @@ public class SightTracker : MonoBehaviour
     }
     void Start()
     {
+        rate = (int)RecordRate;
+        //Debug.Log(rate);
         debugkey = interpretDebugKey(DebugViewButton);
         cam_gameobject = this.gameObject;
         debug_text_hud = cam_gameobject.AddComponent<debugText>();
@@ -56,34 +62,48 @@ public class SightTracker : MonoBehaviour
      * 
      * DISCLAIMER: This does NOT work for incredibly low ms values since Time.deltaTime depends on the users computer
      */
-    private void AddObject()
+    //private void AddObject()
+    //{
+    //    if(IntervalInMS == 0.0f)
+    //    {
+    //        collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
+    //        collectedData.addCurrentLocation(raycaster.getCurrentLocation());
+    //    }
+    //    else
+    //    {
+    //        if(this.doOnce == false) // First iteration just set the upperbound based on user selected Interval specified in MS 
+    //        {
+    //            doOnce = true;
+    //            upperBound += IntervalInMS / 1000;
+    //        }
+    //        else
+    //        {
+    //            // Grab the first object in any given time span and increase the interval to select from
+    //            if (timeElapsed >= lowerBound && timeElapsed <= upperBound)
+    //            {
+    //                // Add what the user is looking at
+    //                collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
+    //                // Add the users current location
+    //                collectedData.addCurrentLocation(raycaster.getCurrentLocation());
+    //                // Increase lower and upperbound
+    //                lowerBound += IntervalInMS / 1000;
+    //                upperBound += IntervalInMS / 1000;
+    //            }
+    //        }
+    //    }
+    //}
+    private void grab_pos_data()
     {
-        if(IntervalInMS == 0.0f)
+        if((counter%rate)==0)
         {
             collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
             collectedData.addCurrentLocation(raycaster.getCurrentLocation());
+            collectedData.addFrameTime(currentSampleTime + Time.deltaTime);
+            //currentSampleTime = 0;
         }
         else
         {
-            if(this.doOnce == false) // First iteration just set the upperbound based on user selected Interval specified in MS 
-            {
-                doOnce = true;
-                upperBound += IntervalInMS / 1000;
-            }
-            else
-            {
-                // Grab the first object in any given time span and increase the interval to select from
-                if (timeElapsed >= lowerBound && timeElapsed <= upperBound)
-                {
-                    // Add what the user is looking at
-                    collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
-                    // Add the users current location
-                    collectedData.addCurrentLocation(raycaster.getCurrentLocation());
-                    // Increase lower and upperbound
-                    lowerBound += IntervalInMS / 1000;
-                    upperBound += IntervalInMS / 1000;
-                }
-            }
+            currentSampleTime += Time.deltaTime;
         }
     }
     // Update is called once per frame
@@ -104,7 +124,8 @@ public class SightTracker : MonoBehaviour
         }
 
         // Adds object to list, see separate function
-        AddObject();
+        //AddObject();
+        grab_pos_data();
 
         //Checks if new object was looked at
         if((raycaster.get_currently_looking_at() != previous_look_at))
@@ -112,7 +133,7 @@ public class SightTracker : MonoBehaviour
             collectedData.addTimedObject(raycaster.get_currently_looking_at());
             previous_look_at = raycaster.get_currently_looking_at();
         }
-
+        counter++;
     }
     private void OnApplicationQuit()
     {
