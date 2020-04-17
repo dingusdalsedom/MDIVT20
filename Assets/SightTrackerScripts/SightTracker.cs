@@ -72,16 +72,14 @@ public class SightTracker : MonoBehaviour
     // Grabs position and oriantation data from camera and accumulated frametime and adds it to POD
     private void grab_pos_data()
     {
-        if((counter%rate)==0)
+        currentSampleTime += Time.deltaTime;
+        if ((counter%rate)==0)
         {
             collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
             collectedData.addCurrentLocation(raycaster.getCurrentLocation());
-            collectedData.addFrameTime(currentSampleTime + Time.deltaTime);
+            collectedData.addFrameTime(currentSampleTime);
         }
-        else
-        {
-            currentSampleTime += Time.deltaTime;
-        }
+       
     }
 
     // Update is called once per frame
