@@ -8,7 +8,6 @@ public class SightTracker : MonoBehaviour
     // Start is called before the first frame update
     public bool debugView;
     private POD collectedData;
-    private float timeElapsed;
     private GameObject cam_gameobject;
     private debugText debug_text_hud;
     private Raycast raycaster;
@@ -16,12 +15,17 @@ public class SightTracker : MonoBehaviour
     public string DebugViewButton = "None";
     private double currentSampleTime = 0;
     KeyCode debugkey;
+    //Enum for selection of record speed
     public enum Speeds
     { Full = 1, Half = 2, Quarter = 4 };
+    //Default speed is full speed
     public Speeds RecordRate = Speeds.Full;
-    // Object polling things
+    //Frame counter
     private uint counter = 0;
+    //Default n:th frame to capture data from for the positional data
     private int rate = 1;
+
+
     //public bool check = (RecordRate == Speeds.Full);
     
     private KeyCode interpretDebugKey(string buttonName)
@@ -62,36 +66,8 @@ public class SightTracker : MonoBehaviour
      * 
      * DISCLAIMER: This does NOT work for incredibly low ms values since Time.deltaTime depends on the users computer
      */
-    //private void AddObject()
-    //{
-    //    if(IntervalInMS == 0.0f)
-    //    {
-    //        collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
-    //        collectedData.addCurrentLocation(raycaster.getCurrentLocation());
-    //    }
-    //    else
-    //    {
-    //        if(this.doOnce == false) // First iteration just set the upperbound based on user selected Interval specified in MS 
-    //        {
-    //            doOnce = true;
-    //            upperBound += IntervalInMS / 1000;
-    //        }
-    //        else
-    //        {
-    //            // Grab the first object in any given time span and increase the interval to select from
-    //            if (timeElapsed >= lowerBound && timeElapsed <= upperBound)
-    //            {
-    //                // Add what the user is looking at
-    //                collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
-    //                // Add the users current location
-    //                collectedData.addCurrentLocation(raycaster.getCurrentLocation());
-    //                // Increase lower and upperbound
-    //                lowerBound += IntervalInMS / 1000;
-    //                upperBound += IntervalInMS / 1000;
-    //            }
-    //        }
-    //    }
-    //}
+
+    //Grabs pos and oriantation data from camera and accumulated frametime and adds it to POD
     private void grab_pos_data()
     {
         if((counter%rate)==0)
@@ -124,7 +100,6 @@ public class SightTracker : MonoBehaviour
         }
 
         // Adds object to list, see separate function
-        //AddObject();
         grab_pos_data();
 
         //Checks if new object was looked at

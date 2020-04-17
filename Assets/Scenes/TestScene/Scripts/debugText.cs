@@ -11,6 +11,7 @@ public class debugText : MonoBehaviour
     private string currently_looking_at;
     private string duration_looked_at;
     private int nr_objects_looked_at;
+    //Setter functions for setting data on the HUD
     public void set_debug_mode(bool debug)
     {
         toggle_debug = debug;
@@ -51,6 +52,7 @@ public class debugText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Set HUD elements
         if(toggle_debug)
         {
             debug_text.text = "Sight tracker debug information: \n" +
@@ -58,6 +60,7 @@ public class debugText : MonoBehaviour
             "Duration looked at: " + duration_looked_at + "\n" +
             "Total number of objects looked at: " + nr_objects_looked_at;
         }
+        //Remove HUD elements if not in debug mode
         else
         {
             debug_text.text = "";

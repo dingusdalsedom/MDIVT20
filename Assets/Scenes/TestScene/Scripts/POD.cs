@@ -28,6 +28,9 @@ public class POD
     {
         lookingAt.Add(v);
     }
+    /*
+    * Function for adding frametime data
+    */
     public void addFrameTime(Double time)
     {
         FrameTime.Add(time);
@@ -47,6 +50,9 @@ public class POD
     {
         return currentLocation[i];
     }
+    /*
+     * Functionfor getting frametime data at index i
+     */
     public Double getFrameTime(int i)
     {
         return FrameTime[i];
@@ -224,6 +230,10 @@ public class POD
     {
         return this.timeSpansSummary[i];
     }
+
+    /*
+    * Function for getting current lookat timer, used on  debug HUD element
+    */
     public double getCurrentStopwatchTime()
     {
         return stopWatch.Elapsed.TotalSeconds;

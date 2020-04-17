@@ -5,6 +5,7 @@ using UnityEngine;
 public class Raycast : MonoBehaviour
 {
     private Camera fpsCam;
+    //Default text when no target is found
     private string currently_looking_at = "Starting...";
     public string get_currently_looking_at()
     {
@@ -39,14 +40,5 @@ public class Raycast : MonoBehaviour
         {
             currently_looking_at = "no target";
         }
-    }
-
-    // formating seconds ellapsed to a string time stamp (min:sec)
-    string timeToText(float t)
-    {
-        string minutes = ((int)t / 60).ToString();
-        string seconds = (t % 60).ToString("f2");
-
-        return minutes + ":" + seconds;
     }
 }
