@@ -18,7 +18,7 @@ public class SightTracker : MonoBehaviour
     KeyCode debugkey;
     public enum Speeds
     { Full = 1, Half = 2, Quarter = 4 };
-    public Speeds RecordRate;
+    public Speeds RecordRate = Speeds.Full;
     // Object polling things
     private uint counter = 0;
     private int rate = 1;
