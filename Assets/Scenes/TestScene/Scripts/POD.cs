@@ -10,6 +10,7 @@ public class POD
     // Constructor
     public POD()
     {
+        // Initialize variables
         objects = new List<string>();
         objectsSummary = new List<string>();
         timeSpans = new List<long>();

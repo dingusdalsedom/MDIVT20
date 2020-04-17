@@ -5,29 +5,35 @@ using System.IO;
 
 public class SightTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Public variables (can be set through Unity editor)
     public bool debugView;
+    public string DebugViewButton = "None";
+
+    // Private member functions
     private POD collectedData;
     private GameObject cam_gameobject;
     private debugText debug_text_hud;
     private Raycast raycaster;
     private string previous_look_at = "";
-    public string DebugViewButton = "None";
     private double currentSampleTime = 0;
+    private uint counter = 0;
+    private int rate = 1;
     KeyCode debugkey;
+
+
     //Enum for selection of record speed
     public enum Speeds
     { Full = 1, Half = 2, Quarter = 4 };
+
     //Default speed is full speed
     public Speeds RecordRate = Speeds.Full;
-    //Frame counter
-    private uint counter = 0;
-    //Default n:th frame to capture data from for the positional data
-    private int rate = 1;
-
-
-    //public bool check = (RecordRate == Speeds.Full);
     
+    /*
+     * Function that sanitizes user input and attempts to map
+     * it to the corresponding Unity KeyCode.
+     * 
+     * DISCLAIMER: User *MUST* supply Unity KeyCode for this to work.
+     */
     private KeyCode interpretDebugKey(string buttonName)
     {
         try
@@ -50,6 +56,8 @@ public class SightTracker : MonoBehaviour
         }
         
     }
+
+    // Start runs once
     void Start()
     {
         rate = (int)RecordRate;
@@ -61,13 +69,7 @@ public class SightTracker : MonoBehaviour
         raycaster = this.gameObject.AddComponent<Raycast>();
     }
 
-    /*
-     * Function for adding an object to the POD based on interval specified by the user in MS
-     * 
-     * DISCLAIMER: This does NOT work for incredibly low ms values since Time.deltaTime depends on the users computer
-     */
-
-    //Grabs pos and oriantation data from camera and accumulated frametime and adds it to POD
+    // Grabs position and oriantation data from camera and accumulated frametime and adds it to POD
     private void grab_pos_data()
     {
         if((counter%rate)==0)
@@ -75,21 +77,22 @@ public class SightTracker : MonoBehaviour
             collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
             collectedData.addCurrentLocation(raycaster.getCurrentLocation());
             collectedData.addFrameTime(currentSampleTime + Time.deltaTime);
-            //currentSampleTime = 0;
         }
         else
         {
             currentSampleTime += Time.deltaTime;
         }
     }
+
     // Update is called once per frame
     void Update()
     {
-        timeElapsed += Time.deltaTime;
+        // Used to toggle Debug HUD
         if (Input.GetKeyDown(debugkey))
         {
             debugView = !debugView;
         }
+        
         //Set HUD if debug is turned on
         debug_text_hud.set_debug_mode(debugView);
         if (debugView)

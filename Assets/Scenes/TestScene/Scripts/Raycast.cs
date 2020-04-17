@@ -12,16 +12,23 @@ public class Raycast : MonoBehaviour
         return currently_looking_at;
     }
 
+    /*
+    * Return the view vector of the camera (direction)
+    */
     public Vector3 getCurrentlyLookingAt()
     {
         return fpsCam.transform.forward;
     }
 
+    /*
+    * Returns the current location of the *camera*
+    */
     public Vector3 getCurrentLocation()
     {
         return fpsCam.transform.position;
     }
-
+    
+    // Do once
     void Start()
     {
         fpsCam = this.gameObject.GetComponent<Camera>();
