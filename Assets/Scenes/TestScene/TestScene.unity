@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.43667555, g: 0.4842717, b: 0.56452394, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3154,14 +3154,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382617704}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7ac54f9a18a0254d9e688facff609ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugView: 1
   DebugViewButton: None
-  IntervalInMS: 0
+  RecordRate: 1
 --- !u!114 &1382617710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3169,14 +3169,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382617704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abdf300da1b43324fa6db0b1af126f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: CSVTimeData2020_04_17_11_02_06.txt
-  InterpolationSteps: 0
-  T: {fileID: 1382617707}
 --- !u!1 &1449941670
 GameObject:
   m_ObjectHideFlags: 0

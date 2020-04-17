@@ -18,7 +18,6 @@ public class Raycast : MonoBehaviour
 
     public Vector3 getCurrentLocation()
     {
-        Debug.Log("player location: " + fpsCam.transform.parent.transform.position);
         return fpsCam.transform.position;
     }
 
