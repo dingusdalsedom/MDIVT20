@@ -59,7 +59,7 @@ contents={\begin{tikzpicture}[remember picture,overlay]
 \newpage
 \section{Introduction}
 This software is developed to help study different behaviors in human-computer interaction. It keeps track of where the user looks, for how long and where the user is located in 3D space. All of this information is saved to disk with timestamps in CSV-files. The software is designed to be easily implemented to any Unity project, by only having to add one script to the Camera in Unity. The information from the files makes it possible to replay a sequence based on the data.
-The files contains the following information:\\
+The files contain the following information:\\
 * Which game objects the user have looked at, and for how long in total.\\
 * A list sorted by time of which objects the user have been looking at, for how long and where the user was located when looking at the particular object.
 \newpage
@@ -88,12 +88,12 @@ You must use Unity keycodes when selecting keybindings for the debug HUD, keycod
 4. You should now see the SightTracker folder in your project, open the folder and drag the script named SightTracker to the camera.\\
 \item \textbf{Settings}\\
 \begin{figure}[h!]
-  \centering \includegraphics[keepaspectratio,scale=0.8]{SightTracker.png}
+  \centering \includegraphics[keepaspectratio,scale=0.9]{SightTracker.png}
   \caption{SightTracker has been added to the camera}
   \label{fig:loadedtocamera}
 \end{figure}
 
-5. The figure above is what the Inspector of the camera should look like. From here you can choose a key to toggle the debug HUD of the SightTracker. The key must, however, be a Unity Keycode \cite{unitykeycode}. From here you can also select a sampling rate in ms. In the figure above this has been set to 500 ms.\\[0.15in]
+5. The figure above is what the Inspector of the camera should look like. From here you can choose a key to toggle the debug HUD of the SightTracker. The key must, however, be a Unity Keycode \cite{unitykeycode}. From here you can also select the sampling rate. The options are: Full, Half and Quarter. This means that the Sight Tracker either captures each frame, every other frame or every fourth frame.\\[0.15in]
 6. The SightTracker will generate three different CSV-files on each run of the program, with timestamps to help distinguish each usage.
 \end{itemize}
 \subsubsection{CSV output}
