@@ -75,7 +75,7 @@ public class SightTracker : MonoBehaviour
         currentSampleTime += Time.deltaTime;
         if ((counter%rate)==0)
         {
-            collectedData.addLookingAtVector(raycaster.getCurrentlyLookingAt());
+            collectedData.addLookingAtVector(raycaster.getCurrentDirection());
             collectedData.addCurrentLocation(raycaster.getCurrentLocation());
             collectedData.addFrameTime(currentSampleTime);
         }
