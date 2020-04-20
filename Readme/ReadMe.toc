@@ -4,8 +4,10 @@
 \contentsline {subsection}{\numberline {2.2}Unique object names}{3}% 
 \contentsline {subsection}{\numberline {2.3}Objects that block player view}{3}% 
 \contentsline {subsection}{\numberline {2.4}Unity Keycodes to specify keybinds}{3}% 
+\contentsline {subsection}{\numberline {2.5}More than one scene}{3}% 
 \contentsline {section}{\numberline {3}Manual}{4}% 
 \contentsline {subsection}{\numberline {3.1}Installation}{4}% 
 \contentsline {subsubsection}{\numberline {3.1.1}CSV output}{5}% 
 \contentsline {subsection}{\numberline {3.2}Using SightTracker}{6}% 
 \contentsline {section}{\numberline {4}Graphical representation of data}{6}% 
+\contentsline {section}{\numberline {5}What we would have wanted to add}{8}% 

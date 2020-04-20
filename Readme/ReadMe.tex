@@ -74,6 +74,8 @@ Do not name the unity gameobjects identically, the SightTracker package differen
 The SightTracker has not been extensively tested, there might be issues with using the tracker along with a complex playermodel. The SightTracker shoots out a beam and records the object that is hit, and certain playermodels might be in the way of the beam. If this is the case, it might be helpful to move the camera to a slightly different position in the playermodel.
 \subsection{Unity Keycodes to specify keybinds}
 You must use Unity keycodes when selecting keybindings for the debug HUD, keycodes can be found on Unity's website \cite{unitykeycode}.
+\subsection{More than one scene}
+The SightTracker package has only been tested while using a single scene. When running a program that changes scenes there will be undefined behaviour, this is not recommended.
 \newpage
 \section{Manual}
 \subsection{Installation}
@@ -126,6 +128,15 @@ If the user wants to create some diagrams for the data, the library bokeh \cite{
 \end{figure}
 \noindent Using a bar chart makes it easy to see what objects the player was looking the most/least. And dependent of what the user wants to study this could be a good way of visualizing the data.
 Of course, bokeh is not the only way to visualize the data. For instance, another resource that could be used is the python library matplotlib \cite{matplotlib}.
+\newpage
+\section{What we would have wanted to add}
+\begin{itemize}
+\item \textbf{Cross scene data gathering}\\
+The package would have supported several scenes and the loading in between them if we had the time.
+\item \textbf{Folder structure for CSV files}\\
+At the moment all CSV files end up in the same folder which makes it rather time consuming to find the specific file you are looking for.\\
+\texttt{'SightTracker/SceneName/DateAndTime/CSVFiles/'} would have been easier to browse.
+\end{itemize}
 \newpage
 \begin{thebibliography}{9}
 \bibitem{unitykeycode}
