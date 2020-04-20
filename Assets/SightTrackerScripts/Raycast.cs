@@ -7,6 +7,10 @@ public class Raycast : MonoBehaviour
     private Camera fpsCam;
     //Default text when no target is found
     private string currently_looking_at = "Starting...";
+    
+    /*
+    * Returns the object name of currently looking at
+    */
     public string get_currently_looking_at()
     {
         return currently_looking_at;
