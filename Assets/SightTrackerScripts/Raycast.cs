@@ -15,7 +15,7 @@ public class Raycast : MonoBehaviour
     /*
     * Return the view vector of the camera (direction)
     */
-    public Vector3 getCurrentlyLookingAt()
+    public Vector3 getCurrentDirection()
     {
         return fpsCam.transform.forward;
     }
