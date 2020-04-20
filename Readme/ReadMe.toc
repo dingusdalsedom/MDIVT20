@@ -1,5 +1,5 @@
 \contentsline {section}{\numberline {1}Introduction}{2}% 
-\contentsline {section}{\numberline {2}Disclaimers}{3}% 
+\contentsline {section}{\numberline {2}Before first use - IMPORTANT!}{3}% 
 \contentsline {subsection}{\numberline {2.1}Faulty data}{3}% 
 \contentsline {subsection}{\numberline {2.2}Unique object names}{3}% 
 \contentsline {subsection}{\numberline {2.3}Objects that block player view}{3}% 
