@@ -114,7 +114,10 @@ Contains two vectors, the first vector is where the player is looking, the secon
 \subsection{Using SightTracker}
 As long as the script was loaded properly onto your own Unity project and attached, as a script, to the camera it should automatically generate the aforementioned CSV files.\\
 The output of the script is to the \texttt{/path\_to\_your\_project/Sight\_tracker}.\\
-The IntervalInMS setting is essentially the polling rate of the program. How often it records the users position and the direction of the camera. By setting this to '0' the program records \textbf{every} frame which generates a huge CSV file if program runs for an extended period of time.
+The Record Rate setting is essentially the polling rate of the program. How often it records the users position and the direction of the camera. By setting this to \texttt{'Full'} the program records \textbf{every} frame which generates a huge CSV file if program runs for an extended period of time.\\[0.15in]
+\texttt{'Full'} - Records the camera direction and position of every frame.\\
+\texttt{'Half'} - Records the camera direction and position of every other frame.\\
+\texttt{'Quarter'} - Records the camera direction and position every fourth frame.
 \section{Graphical representation of data}
 Since this software records a lot of data of what the user is looking at it would be nice to have a way to display the results. This could for example be using a pie or bar chart to show how long each object in the scene have been looked at by the user. Another way to display the collected data could be done by making a 3D heatmap over the entire scene.\\[0.15in]
 As could be imagined, there are a lot of ways to display the data visually, and different users would most likely want it displayed in different ways.\\[0.15in]
