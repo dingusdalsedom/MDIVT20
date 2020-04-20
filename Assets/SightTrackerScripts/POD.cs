@@ -118,8 +118,6 @@ public class POD
             this.timeSpans.Add(timeElapsed);
             stopWatch.Restart();
         }
-        // For debugging purposes
-        //Thread.Sleep(1);
 
         // Add object to summary
         if(objects.Count > 0)

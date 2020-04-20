@@ -60,8 +60,7 @@ public class SightTracker : MonoBehaviour
     // Start runs once
     void Start()
     {
-        rate = (int)RecordRate;
-        //Debug.Log(rate);
+        rate = (int)RecordRate;        
         debugkey = interpretDebugKey(DebugViewButton);
         cam_gameobject = this.gameObject;
         debug_text_hud = cam_gameobject.AddComponent<debugText>();
