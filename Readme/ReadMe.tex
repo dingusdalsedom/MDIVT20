@@ -67,15 +67,15 @@ The files contain the following information:\\
 \newpage
 \section{Before first use - IMPORTANT!}
 \subsection{Faulty data}
-Do not start and/or stop the Sighttracker during the runtime of the scene, this forces the tracker to initialize and adds incorrect data to the CSV file. If you observe a “Starting...” in your CSV file, you have encountered this issue. If this issue has occurred, you have to manually exclude the starting time from further calculations based on the data or rerun the test again.
+Do not start and/or stop SightTracker during the runtime of the scene, this forces the tracker to initialize and adds incorrect data to the CSV file. If you observe a “Starting...” in your CSV file, you have encountered this issue. If this issue has occurred, you have to manually exclude the starting time from further calculations based on the data or rerun the test again.
 \subsection{Unique object names}
 Do not name the Unity gameobjects identically, the SightTracker package differentiates objects based on name. If you have two objects of the same name, when looking at either of them the stopwatch would run continually as if it was one object. This error is hard to notice in the CSV file unless you pay careful attention when running the test.
 \subsection{Objects that block player view}
-The SightTracker has not been extensively tested, there might be issues with using the tracker together with a player model holding for example a shield or something else that blocks the view. The SightTracker shoots out a beam and records the object that is hit, and certain player models might be in the way of the beam. If this is the case, it might be helpful to move the camera to a slightly different position in the playermodel.
+The SightTracker has not been extensively tested, there might be issues with using the tracker together with a player model holding an object that blocks the view. The SightTracker shoots out a beam and records the object that is hit, and certain player models might be in the way of the beam. If this is the case, it might work if you move the camera to a slightly different position in the player model.
 \subsection{Unity Keycodes to specify keybinds}
 You must use Unity keycodes when selecting keybindings for the debug HUD, keycodes can be found on Unity's website \cite{unitykeycode}.
 \subsection{More than one scene}
-The SightTracker package has only been tested while using a single scene. When running a program that changes scenes there will be undefined behaviour. The recommendation is therefore that you use this only if you are running a single scene.
+The SightTracker package has only been tested while using a single scene. When running a program that changes scene there might (most likely will) be undefined behaviour. The recommendation is therefore that you use this only if you are running a single scene.
 \newpage
 \section{Manual}
 \subsection{Installation}
@@ -119,20 +119,20 @@ The Record Rate setting is essentially the polling rate of the program. How ofte
 \texttt{'Half'} - Records the camera direction and position of every other frame.\\
 \texttt{'Quarter'} - Records the camera direction and position every fourth frame.
 \subsection{Exiting SightTracker}
-For the recorded data to be saved into the files, the program must be stopped while in the same scene. If the scene is changed before exiting, no data will be saved to disk.
+For the recorded data to be saved in files on disk, the program must be stopped while in the same scene. If the scene is changed before exiting, no data will be saved to disk or at the very least undefined behaviour will follow.
 \section{Graphical representation of data}
 Since this software records a lot of data of what the user is looking at it would be nice to have a way to display the results. This could for example be using a pie or bar chart to show how long each object in the scene have been looked at by the user. Another way to display the collected data could be done by making a 3D heatmap over the entire scene.\\[0.15in]
 As could be imagined, there are a lot of ways to display the data visually, and different users would most likely want it displayed in different ways.\\[0.15in]
 Thus, we decided not to create an explicit program to display the data. Instead we are going to share some good resources for visualizing a CSV file.\\[0.15in]
-If the user wants to create some diagrams for the data, the library bokeh \cite{bokeh} is a great option. This library can create interactive visualization graphs for web browsers. With a minimum amount of python code you could make the following bar chart from the SightTracker generated CSV data file. This chart can be viewed in any web browser and have features such as move, zoom and save.
+If the user wants to create some diagrams for the data, the library \texttt{bokeh} \cite{bokeh} is a great option. This library can create interactive visualization graphs for web browsers. With a minimum amount of python code you could make the following bar chart from the SightTracker generated CSV data files. This chart can be viewed in any web browser and have features such as move, zoom and save.
 \newpage
 \begin{figure}[h!]
   \centering \includegraphics[keepaspectratio,scale=0.3]{GraphStuff.png}
   \caption{Visualization of recorded data}
   \label{fig:graphvisualization}
 \end{figure}
-\noindent Using a bar chart makes it easy to see what objects the player was looking at the most/least. Depending on what the user wants to study this could be a good way of visualizing the data.
-Of course, bokeh is not the only option when it comes to visualize the data. For instance, another resource that could be used is the python library matplotlib \cite{matplotlib}.
+\noindent Using a bar chart makes it easy to see which objects the player was looking at the most/least. Depending on what the user wants to study this could be a good way of visualizing data.
+Of course, \texttt{bokeh} \cite{bokeh} is not the only option when it comes to visualization of data. For instance, another resource that could be used is the python library \texttt{matplotlib} \cite{matplotlib}.
 \newpage
 \section{What we would have wanted to add}
 \begin{itemize}
@@ -141,6 +141,10 @@ The package would have supported several scenes and the loading in between them 
 \item \textbf{Folder structure for CSV files}\\
 At the moment all CSV files end up in the same folder which makes it rather time consuming to find the specific file you are looking for.\\
 \texttt{'SightTracker/SceneName/DateAndTime/CSVFiles/'} would have been easier to browse.
+\item \textbf{Fully functioning replays}\\
+At the time we have a ReplayFromCSV script that works for our scene. We have noticed that it, however, highly depends on camera implementation of the user program. This is something we would have liked to solve.
+\item \textbf{Interpolation of replays}\\
+We also would have liked to implement some sort of interpolations if the user records in \texttt{'Half'} or \texttt{'Quarter'} speed. Reduce the amount of lines written to disk while still experiencing a seemless playback from CSV.
 \end{itemize}
 \newpage
 \begin{thebibliography}{9}

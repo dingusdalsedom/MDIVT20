@@ -9,5 +9,6 @@
 \contentsline {subsection}{\numberline {3.1}Installation}{4}% 
 \contentsline {subsubsection}{\numberline {3.1.1}CSV output}{5}% 
 \contentsline {subsection}{\numberline {3.2}Using SightTracker}{6}% 
+\contentsline {subsection}{\numberline {3.3}Exiting SightTracker}{6}% 
 \contentsline {section}{\numberline {4}Graphical representation of data}{6}% 
 \contentsline {section}{\numberline {5}What we would have wanted to add}{8}% 
