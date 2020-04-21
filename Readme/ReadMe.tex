@@ -59,10 +59,10 @@ contents={\begin{tikzpicture}[remember picture,overlay]
 \newpage
 \section{Introduction}
 This software is developed to help study different behaviors in human-computer interaction. It keeps track of where the user looks, for how long and where the user is located in 3D space. All of this information is saved to disk with timestamps in CSV-files. The software is designed to be easily implemented to any Unity project, by only having to add one script to the Camera in Unity. The information from the files makes it possible to replay a sequence based on the data.
-The files contain the following information:\\
+The files contain the following information:
 \begin{itemize}
 \item \textbf{Sequential data}\\
-Which game objects the user have looked at, and for how long in sorted in order of \\occurerrence. (same object may appear several times)\\
+Which game objects the user have looked at, and for how long in sorted in order of \\occurerrence. (same object may appear several times)
 \item \textbf{Summarized data}\\
 Total time looked at each object. (one object will only appear once)
 \item \textbf{Looking at and positional data}\\
@@ -149,7 +149,7 @@ At the moment all CSV files end up in the same folder which makes it rather time
 \item \textbf{Fully functioning replays}\\
 At the time we have a ReplayFromCSV script that works for our scene. We have noticed that it, however, highly depends on camera implementation of the user program. This is something we would have liked to solve.
 \item \textbf{Interpolation of replays}\\
-We also would have liked to implement some sort of interpolations if the user records in \texttt{'Half'} or \texttt{'Quarter'} speed. Reduce the amount of lines written to disk while still experiencing a seemless playback from CSV.
+We also would have liked to implement some sort of interpolation if the user records in \texttt{'Half'} or \texttt{'Quarter'} speed. Reduce the amount of lines written to disk while still experiencing a seamless playback from CSV.
 \end{itemize}
 \newpage
 \begin{thebibliography}{9}
