@@ -71,15 +71,15 @@ The SightTracker will also record where you are and what you are looking at on e
 \newpage
 \section{Before first use - IMPORTANT!}
 \subsection{Faulty data}
-Do not start and/or stop SightTracker during the runtime of the scene, this forces the tracker to initialize and adds incorrect data to the CSV file. If you observe a “Starting...” in your CSV file, you have encountered this issue. If this issue has occurred, you have to manually exclude the starting time from further calculations based on the data or rerun the test again.
+Do not enable or disable the SightTracker script during the runtime of the scene, enabling the script during runtime forces it to initialize which causes incorrect data to be added to the CSV file. If you observe a “Starting...” in your CSV file, you have encountered this issue.
 \subsection{Unique object names}
-Do not name the Unity gameobjects identically, the SightTracker package differentiates objects based on name. If you have two objects of the same name, when looking at either of them the stopwatch would run continually as if it was one object. This error is hard to notice in the CSV file unless you pay careful attention when running the test.
+Do not name the Unity gameobjects identically, the SightTracker script differentiates objects based on name. If you have two objects of the same name, the script considers them to be the same object so they are timed as one object.
 \subsection{Objects that block player view}
-The SightTracker has not been extensively tested, there might be issues with using the tracker together with a player model holding an object that blocks the view. The SightTracker shoots out a beam and records the object that is hit, and certain player models might be in the way of the beam. If this is the case, it might work if you move the camera to a slightly different position in the player model.
+Do not obstruct the camera with objects that you do not want timed. The SightTracker shoots out a beam and records the object that is hit, if you obstruct the beam the SightTracker will not work as intended.
 \subsection{Unity Keycodes to specify keybinds}
 You must use Unity keycodes when selecting keybindings for the debug HUD, keycodes can be found on Unity's website \cite{unitykeycode}.
 \subsection{More than one scene}
-The SightTracker package has only been tested while using a single scene. When running a program that changes scene there might (most likely will) be undefined behaviour. The recommendation is therefore that you use this only if you are running a single scene.
+Do not use the SightTracker script if you are planning on using more than one scene. Running the script while changing scene will cause undefined behaviour.
 \newpage
 \section{Manual}
 \subsection{Installation}
