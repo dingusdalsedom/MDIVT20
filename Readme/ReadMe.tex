@@ -61,8 +61,12 @@ contents={\begin{tikzpicture}[remember picture,overlay]
 This software is developed to help study different behaviors in human-computer interaction. It keeps track of where the user looks, for how long and where the user is located in 3D space. All of this information is saved to disk with timestamps in CSV-files. The software is designed to be easily implemented to any Unity project, by only having to add one script to the Camera in Unity. The information from the files makes it possible to replay a sequence based on the data.
 The files contain the following information:\\
 \begin{itemize}
-\item Which game objects the user have looked at, and for how long in total.\\
-\item A list sorted by time of which objects the user have been looking at, for how long and where the user was located when looking at the particular object.
+\item \textbf{Sequential data}\\
+Which game objects the user have looked at, and for how long in sorted in order of \\occurerrence. (same object may appear several times)\\
+\item \textbf{Summarized data}\\
+Total time looked at each object. (one object will only appear once)
+\item \textbf{Looking at and positional data}\\
+The SightTracker will also record where you are and what you are looking at on each frame. This depends on a setting which will be explained later in the \texttt{Manual} section.
 \end{itemize}
 \newpage
 \section{Before first use - IMPORTANT!}
@@ -79,6 +83,7 @@ The SightTracker package has only been tested while using a single scene. When r
 \newpage
 \section{Manual}
 \subsection{Installation}
+This is what it looks like in \texttt{Unity 2019.3.10f1}. It might vary.
 \begin{itemize}
 \item \textbf{Importing to Unity}\\
 1. Open up your project, go to 'Assets' in the top menu bar.\\[0.15in]
@@ -104,7 +109,7 @@ The SightTracker package has only been tested while using a single scene. When r
 The SightTracker package generates three different CSV files as mentioned earlier\\
 \begin{itemize}
 \item \textbf{CSVSequential} [Object, time]\\
-Contains a list of which objects the user have been looking at in order and a duration for how long the object was looked at.
+Contains a list of which objects the user have been looking at in order of occurrence and a duration for how long the object was looked at.
 \item \textbf{CSVSummary} [Object, time]\\
 Contains a summary of all objects looked at and the total time looked at each object.
 \item \textbf{CSVTimeData} [3D Vector, 3D Vector, TimeStamp]\\
@@ -114,7 +119,7 @@ Contains two vectors, the first vector is where the player is looking, the secon
 \subsection{Using SightTracker}
 As long as the script was loaded properly onto your own Unity project and attached, as a script, to the camera it should automatically generate the aforementioned CSV files.\\
 The output of the script is to the folder \texttt{'/path\_to\_your\_project/Sight\_tracker/'}.\\
-The Record Rate setting is essentially the polling rate of the program. How often it records the users position and the direction of the camera. By setting this to \texttt{'Full'} the program records \textbf{every} frame which generates a huge CSV file if program runs for an extended period of time.\\[0.15in]
+The Record Rate setting is essentially the polling rate of how often it records the users position and the direction of the camera. By setting this to \texttt{'Full'} the program records \textbf{every} frame which generates a huge CSV file if program runs for an extended period of time.\\[0.15in]
 \texttt{'Full'} - Records the camera direction and position of every frame.\\
 \texttt{'Half'} - Records the camera direction and position of every other frame.\\
 \texttt{'Quarter'} - Records the camera direction and position every fourth frame.
